@@ -62,6 +62,7 @@ flutter:
     - assets/img/e-school-logo.png
     - assets/img/e-footer.png
     - assets/img/eschool-cambodia.png
+    - assets/img/logo-outline.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

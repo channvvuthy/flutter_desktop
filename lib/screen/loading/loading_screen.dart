@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/screen/auth/login_screen.dart';
+import 'package:get/get.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -38,6 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       }
 
       if (startLoading >= 3) {
+        Get.to(() => LoginScreen());
         timer.cancel();
       }
     });
