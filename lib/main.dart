@@ -14,8 +14,10 @@ void main() async {
   windowManager.maximize();
   windowManager.setTitle(appName);
   runApp(GetMaterialApp(
-    theme:
-        ThemeData(backgroundColor: WHITE_COLOR, brightness: Brightness.light),
+    theme: ThemeData(
+        fontFamily: "Ubuntu",
+        backgroundColor: WHITE_COLOR,
+        brightness: Brightness.light),
     debugShowCheckedModeBanner: false,
     initialRoute: "/loading_screen",
     getPages: [
