@@ -98,24 +98,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: ButtonBg(
                                     txt: "Login",
                                     onTap: () {
-                                      validate(
+                                      if (validate(
                                         {
                                           'phone': {
                                             'value': phone.text,
                                             'validate': {
                                               'required': true,
-                                              "min": 6
+                                              "min": 6,
+                                              "email": true,
                                             }
                                           },
                                           'password': {
                                             'value': password.text,
                                             'validate': {
                                               'required': true,
-                                              "min": 6
+                                              "min": 6,
                                             }
                                           },
                                         },
-                                      );
+                                      )) {
+                                        print("success");
+                                      }
                                     }),
                               ),
                               SizedBox(

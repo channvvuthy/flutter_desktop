@@ -84,14 +84,9 @@ flutter:
           weight: 300
         - asset: assets/fonts/Kantumruy/Kantumruy-Regular.ttf
           weight: 400
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
     - family: Ubuntu
       fonts:
-        - asset: fonts/Ubuntu/Ubuntu-Light.ttf
+        - asset: assets/fonts/Ubuntu/Ubuntu-Light.ttf
           weight: 300
-        - asset: fonts/Ubuntu/Ubuntu-Regular.ttf
+        - asset: assets/fonts/Ubuntu/Ubuntu-Regular.ttf
           weight: 400
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages

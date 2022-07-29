@@ -1,21 +1,58 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print
 
-validate(Map params) {
+import 'package:flutter_desktop/constant/color.dart';
+import 'package:get/get.dart';
+
+bool validate(Map params) {
   for (var key in params.keys) {
     if (params[key].containsKey("validate")) {
       var vl = params[key]['validate'];
 
       if (vl.containsKey("required") && params[key]["value"].isEmpty) {
-        print("Field $key is required");
+        validateDialog("Field $key is required");
         return false;
       }
 
       if (vl.containsKey("min") && vl["min"] > params[key]["value"].length) {
-        print("Field $key must be greater than " + vl["min"].toString());
+        validateDialog(
+            "Field $key must be greater than " + vl["min"].toString());
         return false;
+      }
+
+      if (vl.containsKey("phone")) {
+        String regexPattern = r'^(?:[+0][1-9])?[0-9]{10,12}$';
+        var regExp = RegExp(regexPattern);
+
+        if (regExp.hasMatch(params[key]["value"]) == false) {
+          validateDialog("Invalid phone number");
+          return false;
+        }
+      }
+
+      if (vl.containsKey("email")) {
+        String regexPattern =
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+        var regExp = RegExp(regexPattern);
+
+        if (regExp.hasMatch(params[key]["value"]) == false) {
+          validateDialog("Invalid email address");
+          return false;
+        }
       }
     }
   }
 
   return true;
+}
+
+validateDialog(String middleText) {
+  Get.defaultDialog(
+      title: "Error",
+      middleText: middleText,
+      radius: 20,
+      textConfirm: "Ok",
+      onConfirm: () {
+        Get.back();
+      },
+      buttonColor: PRIMARY_COLOR);
 }
