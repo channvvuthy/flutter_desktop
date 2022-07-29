@@ -19,6 +19,11 @@ bool validate(Map params) {
         return false;
       }
 
+      if (vl.containsKey("max") && vl["max"] < params[key]["value"].length) {
+        validateDialog("Field $key must be less than " + vl["min"].toString());
+        return false;
+      }
+
       if (vl.containsKey("phone")) {
         String regexPattern = r'^(?:[+0][1-9])?[0-9]{10,12}$';
         var regExp = RegExp(regexPattern);
