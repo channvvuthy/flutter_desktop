@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/helper/validate.dart';
 import 'package:flutter_desktop/widgets/button_bg.dart';
 import 'package:flutter_desktop/widgets/input_border_only_bottom.dart';
 
@@ -94,7 +95,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: ButtonBg(txt: "Login", onTap: () {}),
+                                child: ButtonBg(
+                                    txt: "Login",
+                                    onTap: () {
+                                      validate(
+                                        {
+                                          'phone': {
+                                            'value': phone.text,
+                                            'validate': {
+                                              'required': true,
+                                              "min": 6
+                                            }
+                                          },
+                                          'password': {
+                                            'value': password.text,
+                                            'validate': {
+                                              'required': true,
+                                              "min": 6
+                                            }
+                                          },
+                                        },
+                                      );
+                                    }),
                               ),
                               SizedBox(
                                 height: 30,

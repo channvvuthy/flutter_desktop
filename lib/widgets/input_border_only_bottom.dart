@@ -28,8 +28,8 @@ class InputBorderOnlyBottom extends StatelessWidget {
         SvgPicture.asset(
           svgUrl,
           color: ICON_COLOR,
-          width: 24,
-          height: 24,
+          width: 22,
+          height: 22,
         ),
         SizedBox(
           width: 10,

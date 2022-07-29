@@ -11,19 +11,19 @@ class ButtonBg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: GestureDetector(
-        onTap: onTap,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        height: 40,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8), color: PRIMARY_COLOR),
         child: Text(
           txt,
           style: TextStyle(color: WHITE_COLOR),
         ),
       ),
-      height: 40,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8), color: PRIMARY_COLOR),
     );
   }
 }
