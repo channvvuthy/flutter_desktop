@@ -36,6 +36,10 @@ dependencies:
   window_manager: ^0.2.5
   get: ^4.6.5
   flutter_svg: ^1.1.1+1
+  dio: ^4.0.6
+  shared_preferences: ^2.0.15
+  device_info_plus: ^4.0.0
+  device_info_plus_macos: ^2.2.3
 
 dev_dependencies:
   flutter_test:

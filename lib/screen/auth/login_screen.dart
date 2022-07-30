@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/controllers/home_controller.dart';
 import 'package:flutter_desktop/helper/validate.dart';
 import 'package:flutter_desktop/widgets/button_bg.dart';
 import 'package:flutter_desktop/widgets/input_border_only_bottom.dart';
@@ -15,9 +16,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  HomeController homeController = HomeController();
+
   @override
   void initState() {
     super.initState();
+
+    homeController.getProvince();
   }
 
   @override
