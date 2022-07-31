@@ -1,4 +1,4 @@
-// ignore_for_file: unused_catch_clause, empty_catches, prefer_const_constructors, avoid_print
+// ignore_for_file: unused_catch_clause, empty_catches, prefer_const_constructors, avoid_print, unused_field, unnecessary_null_comparison
 
 import 'package:dio/dio.dart';
 import 'package:flutter_desktop/config/config.dart';
@@ -8,6 +8,9 @@ import 'dio_exception.dart';
 
 class DioService {
   late final Dio _dio;
+  late String _xtoken;
+
+  var headers = {"accept": "application/json", "Authorization": basicAuth};
 
   initializeInterceptor() async {
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
@@ -19,12 +22,15 @@ class DioService {
     }));
   }
 
+  setToken(String token) {
+    _xtoken = token;
+  }
+
   void init() {
-    _dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
-      "accept": "application/json",
-      "Content-Type": "multipart/form-data",
-      "Authorization": basicAuth
-    }));
+    if (_xtoken != null) {
+      headers.addAll({"xtoken": _xtoken});
+    }
+    _dio = Dio(BaseOptions(baseUrl: baseUrl, headers: headers));
     initializeInterceptor();
   }
 

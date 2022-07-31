@@ -5,6 +5,7 @@ import 'package:flutter_desktop/config/config.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/local/local_tran.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
+import 'package:flutter_desktop/screen/home/home_screen.dart';
 import 'package:flutter_desktop/screen/loading/loading_screen.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
@@ -25,7 +26,8 @@ void main() async {
     initialRoute: "/loading_screen",
     getPages: [
       GetPage(name: "/loading_screen", page: () => LoadingScreen()),
-      GetPage(name: "/login_screen", page: () => LoginScreen())
+      GetPage(name: "/login_screen", page: () => LoginScreen()),
+      GetPage(name: "/home_screen", page: () => HomeScreen())
     ],
   ));
 }

@@ -25,7 +25,7 @@ bool validate(Map params) {
       }
 
       if (vl.containsKey("phone")) {
-        String regexPattern = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$';
+        String regexPattern = r'^(?:[+0]9)?[0-9]{9}$';
         var regExp = RegExp(regexPattern);
 
         if (regExp.hasMatch(params[key]["value"]) == false) {
@@ -54,7 +54,7 @@ validateDialog(String middleText) {
   Get.defaultDialog(
       title: "Error",
       middleText: middleText,
-      radius: 20,
+      radius: 16,
       textConfirm: "Ok",
       onConfirm: () {
         Get.back();

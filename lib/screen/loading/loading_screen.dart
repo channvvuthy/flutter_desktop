@@ -1,11 +1,13 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types, unused_element, must_be_immutable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types, unused_element, must_be_immutable, unnecessary_null_comparison
 
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/helper/local_storage.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
+import 'package:flutter_desktop/screen/home/home_screen.dart';
 import 'package:get/get.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -19,6 +21,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
   bool isSkill = false;
   bool isIncome = false;
   int startLoading = 0;
+
+  loginOrHome() async {
+    String token = await LocalStorage.getItem("xtoken");
+
+    if (token != null) {
+      Get.to(() => HomeScreen());
+    } else {
+      Get.to(() => LoginScreen());
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +53,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       }
 
       if (startLoading >= 3) {
-        Get.to(() => LoginScreen());
+        loginOrHome();
         timer.cancel();
       }
     });
