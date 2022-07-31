@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/config/config.dart';
 import 'package:flutter_desktop/constant/color.dart';
+import 'package:flutter_desktop/local/local_tran.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
 import 'package:flutter_desktop/screen/loading/loading_screen.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,8 @@ void main() async {
   windowManager.maximize();
   windowManager.setTitle(appName);
   runApp(GetMaterialApp(
+    translations: LocalTran(),
+    locale: Locale("en", "US"),
     theme: ThemeData(
         fontFamily: "Ubuntu",
         backgroundColor: WHITE_COLOR,

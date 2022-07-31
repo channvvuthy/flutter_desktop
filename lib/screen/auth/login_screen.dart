@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/home_controller.dart';
+import 'package:flutter_desktop/controllers/login_controller.dart';
 import 'package:flutter_desktop/helper/validate.dart';
 import 'package:flutter_desktop/widgets/button_bg.dart';
 import 'package:flutter_desktop/widgets/input_border_only_bottom.dart';
@@ -17,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   HomeController homeController = HomeController();
+  LoginController loginController = LoginController();
 
   @override
   void initState() {
@@ -110,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             'validate': {
                                               'required': true,
                                               "min": 6,
-                                              "email": true,
+                                              "phone": true,
                                             }
                                           },
                                           'password': {
@@ -122,7 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           },
                                         },
                                       )) {
-                                        print("success");
+                                        loginController.login(
+                                            phone.text, password.text);
                                       }
                                     }),
                               ),

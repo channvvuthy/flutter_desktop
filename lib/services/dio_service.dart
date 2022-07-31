@@ -40,9 +40,17 @@ class DioService {
     }
   }
 
-  // Future<Response> post(String endpoint, Map body) async {
-  //   return 1;
-  // }
+  Future<Response> post(String endpoint, Map body) async {
+    try {
+      return await _dio.post(endpoint, data: body);
+    } on DioError catch (err) {
+      final errorMessage = DioException.fromDioError(err).toString();
+      throw errorMessage;
+    } catch (e) {
+      print(e);
+      throw e.toString();
+    }
+  }
 
   // Future<Response> delete(String endpoint, String id) async {
   //   return 1;

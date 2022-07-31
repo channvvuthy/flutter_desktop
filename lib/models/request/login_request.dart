@@ -17,7 +17,7 @@ class LoginRequest {
     required this.acceptedPostPolicy,
   });
 
-  int phone;
+  String phone;
   String password;
   String deviceId;
   String deviceName;
