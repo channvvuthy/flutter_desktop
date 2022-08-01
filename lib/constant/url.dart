@@ -29,4 +29,6 @@ const policyUrl = "assets/svg/policy.svg";
 const chatUrl = "assets/svg/chat.svg";
 const enUrl = "assets/svg/en.svg";
 const khUrl = "assets/svg/kh.svg";
+const homeThinUrl = "assets/svg/home_thin.svg";
+const parthnerThinUrl = "assets/svg/parthner_thin.svg";
 const footerUrl = "assets/img/e-footer.png";
