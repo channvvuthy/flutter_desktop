@@ -49,7 +49,7 @@ const en = {
   "profile": "Profile",
   "change_password": "Change Password",
   "parent": "Parent",
-  "Insurance": "Insurance",
+  "insurance": "Insurance",
   "invoice": "Invoice",
   "other": "Other",
   "logout": "Logout",

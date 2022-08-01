@@ -49,7 +49,7 @@ const kh = {
   "profile": "ពត៌មានផ្ទាល់ខ្លួន",
   "change_password": "ប្តូរពាក្យសំងាត់",
   "parent": "អាណាព្យាបាល",
-  "Insurance": "ធានារ៉ាប់រង",
+  "insurance": "ធានារ៉ាប់រង",
   "invoice": "វិក្កយបត្រ",
   "other": "ផ្សេងទៀត",
   "logout": "ចាកចេញ",

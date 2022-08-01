@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class IconMenu extends StatelessWidget {
   final String title;
@@ -39,7 +40,10 @@ class IconMenu extends StatelessWidget {
           ),
           Text(
             title,
-            style: TextStyle(fontSize: 11),
+            style: TextStyle(
+                fontSize: 11,
+                fontFamily:
+                    Get.locale?.languageCode == "en" ? "Ubuntu" : "Kantumruy"),
             softWrap: false,
           ),
         ]),

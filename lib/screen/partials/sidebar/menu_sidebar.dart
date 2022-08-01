@@ -139,37 +139,37 @@ class MenuSidebar extends StatelessWidget {
             children: <Widget>[
               IconMenu(
                 title: "profile".tr,
-                icnUrl: myCourseUrl,
+                icnUrl: profileUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "change_password".tr,
-                icnUrl: zoomUrl,
+                icnUrl: changePasswordUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "parent".tr,
-                icnUrl: libraryUrl,
+                icnUrl: parentUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "insurance".tr,
-                icnUrl: favoriteUrl,
+                icnUrl: insuranceUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "invoice".tr,
-                icnUrl: friendUrl,
+                icnUrl: invoiceUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "other".tr,
-                icnUrl: documentUrl,
+                icnUrl: otherUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "logout".tr,
-                icnUrl: galleryUrl,
+                icnUrl: logoutUrl,
                 onTap: () {},
               ),
             ],
@@ -196,38 +196,46 @@ class MenuSidebar extends StatelessWidget {
             children: <Widget>[
               IconMenu(
                 title: "hot_chat".tr,
-                icnUrl: myCourseUrl,
+                icnUrl: chatUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "policy".tr,
-                icnUrl: zoomUrl,
+                icnUrl: policyUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "help".tr,
-                icnUrl: libraryUrl,
+                icnUrl: helpUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "about".tr,
-                icnUrl: favoriteUrl,
+                icnUrl: aboutUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "share_app".tr,
-                icnUrl: friendUrl,
+                icnUrl: shareUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "dark_mode".tr,
-                icnUrl: documentUrl,
+                icnUrl: modeUrl,
                 onTap: () {},
               ),
               IconMenu(
                 title: "language".tr,
-                icnUrl: galleryUrl,
-                onTap: () {},
+                icnUrl: Get.locale?.languageCode == "en" ? enUrl : khUrl,
+                onTap: () {
+                  if (Get.locale?.languageCode == "en") {
+                    var locale = Locale('kh', 'kh_KM');
+                    Get.updateLocale(locale);
+                  } else {
+                    var locale = Locale('en', 'en_US');
+                    Get.updateLocale(locale);
+                  }
+                },
               ),
             ],
           ),
