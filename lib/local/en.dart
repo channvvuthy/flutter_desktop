@@ -29,5 +29,9 @@ const en = {
   "4173":
       "You request are blocked, \n due you had been got 3 request denies,\n Please contact our administrator for more info.\n Thank your!",
   "unknown": "Unknown",
-  "my_qr": "My QR"
+  "my_qr": "My QR",
+  "study_and_sharing": "Study & Sharing",
+  "report": "Report",
+  "me_and_privacy": "Me & Privacy",
+  "e_school": "E-School Cambodia"
 };

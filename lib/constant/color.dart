@@ -8,3 +8,4 @@ const DARK_RED_COLOR = Color(0XFF931e20);
 const BLACK_COLOR = Color(0XFF000000);
 const ICON_COLOR = Color(0XFFBEBEBE);
 const FORGET_PASS = Color(0XFF7D7D7D);
+const BORDER_COLOR = Color(0xFF4A4A4A);

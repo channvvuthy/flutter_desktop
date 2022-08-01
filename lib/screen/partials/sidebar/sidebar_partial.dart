@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/controllers/setting_controller.dart';
 import 'package:flutter_desktop/screen/partials/profile_info.dart';
+import 'package:flutter_desktop/screen/partials/sidebar/menu_sidebar.dart';
 import 'package:flutter_desktop/widgets/menu_hidden.dart';
 import 'package:flutter_desktop/widgets/menu_opend.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,14 @@ class SidebarPartial extends StatelessWidget {
                   color: WHITE_COLOR,
                 ),
                 width: settingCtr.isMenuOpen.value ? 350 : 0,
-                child: Column(children: [ProfileInfo()]),
+                child: Column(children: [
+                  ProfileInfo(),
+                  Expanded(
+                      child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [MenuSidebar()],
+                  ))
+                ]),
               ),
               Align(
                 alignment: Alignment(0, -0.95),
