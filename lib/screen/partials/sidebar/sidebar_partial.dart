@@ -20,17 +20,25 @@ class SidebarPartial extends StatelessWidget {
               Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                  color: PRIMARY_COLOR,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 3,
+                      blurRadius: 3,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                  color: WHITE_COLOR,
                 ),
                 width: settingCtr.isMenuOpen.value ? 350 : 0,
                 child: Column(children: [ProfileInfo()]),
               ),
               Align(
-                alignment: Alignment(0, -0.9),
+                alignment: Alignment(0, -0.95),
                 child: Container(
                   padding: EdgeInsets.only(right: 5),
                   alignment: Alignment.center,
-                  width: 55,
+                  width: 50,
                   height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(

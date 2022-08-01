@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types, unused_element, must_be_immutable, unnecessary_null_comparison
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/controllers/auth_controller.dart';
 import 'package:flutter_desktop/helper/local_storage.dart';
+import 'package:flutter_desktop/models/response/login_response.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
 import 'package:flutter_desktop/screen/home/home_screen.dart';
 import 'package:get/get.dart';
@@ -24,8 +27,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   loginOrHome() async {
     String token = await LocalStorage.getItem("xtoken");
+    var login = await LocalStorage.getItem("user");
+    LoginResponse auth = LoginResponse.fromJson(jsonDecode(login));
+
+    AuthController authCtrl = Get.put(AuthController());
 
     if (token != null) {
+      authCtrl.setLoginStatus(true);
+      authCtrl.setAuthenticationUser(auth);
+      authCtrl.setToken(token);
+
       Get.to(() => HomeScreen());
     } else {
       Get.to(() => LoginScreen());

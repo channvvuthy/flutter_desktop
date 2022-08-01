@@ -14,6 +14,10 @@ class DioService {
 
   initializeInterceptor() async {
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      if (_xtoken != null) {
+        options.headers.addAll({"xtoken": _xtoken});
+      }
+
       return handler.next(options);
     }, onResponse: (response, handler) {
       return handler.next(response);
@@ -27,9 +31,6 @@ class DioService {
   }
 
   void init() {
-    if (_xtoken != null) {
-      headers.addAll({"xtoken": _xtoken});
-    }
     _dio = Dio(BaseOptions(baseUrl: baseUrl, headers: headers));
     initializeInterceptor();
   }

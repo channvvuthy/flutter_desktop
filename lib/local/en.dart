@@ -28,4 +28,6 @@ const en = {
       "You already make request change, \nYour request on the way pending.\n Please waiting our administrator response.\n Thank your!",
   "4173":
       "You request are blocked, \n due you had been got 3 request denies,\n Please contact our administrator for more info.\n Thank your!",
+  "unknown": "Unknown",
+  "my_qr": "My QR"
 };
