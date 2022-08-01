@@ -11,4 +11,7 @@ const friendUrl = "assets/svg/friend.svg";
 const documentUrl = "assets/svg/document.svg";
 const galleryUrl = "assets/svg/gallery.svg";
 const certificateUrl = "assets/svg/certificate.svg";
+const activityUrl = "assets/svg/activity.svg";
+const bookUrl = "assets/svg/book.svg";
+const relativeUrl = "assets/svg/relative.svg";
 const footerUrl = "assets/img/e-footer.png";

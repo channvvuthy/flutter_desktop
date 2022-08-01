@@ -88,20 +88,20 @@ class MenuSidebar extends StatelessWidget {
             crossAxisCount: 4,
             children: <Widget>[
               IconMenu(
-                title: "My Course",
+                title: "Summary",
+                icnUrl: activityUrl,
+              ),
+              IconMenu(
+                title: "Watch Video",
                 icnUrl: myCourseUrl,
               ),
               IconMenu(
-                title: "My Zoom",
-                icnUrl: zoomUrl,
+                title: "Read Book",
+                icnUrl: bookUrl,
               ),
               IconMenu(
-                title: "My Library",
-                icnUrl: libraryUrl,
-              ),
-              IconMenu(
-                title: "Favorite",
-                icnUrl: favoriteUrl,
+                title: "Relative",
+                icnUrl: relativeUrl,
               ),
             ],
           ),
@@ -126,36 +126,32 @@ class MenuSidebar extends StatelessWidget {
             crossAxisCount: 4,
             children: <Widget>[
               IconMenu(
-                title: "My Course",
+                title: "Profile",
                 icnUrl: myCourseUrl,
               ),
               IconMenu(
-                title: "My Zoom",
+                title: "Change Password",
                 icnUrl: zoomUrl,
               ),
               IconMenu(
-                title: "My Library",
+                title: "Parent",
                 icnUrl: libraryUrl,
               ),
               IconMenu(
-                title: "Favorite",
+                title: "Insurance",
                 icnUrl: favoriteUrl,
               ),
               IconMenu(
-                title: "Friend",
+                title: "Invoice",
                 icnUrl: friendUrl,
               ),
               IconMenu(
-                title: "Document",
+                title: "Other",
                 icnUrl: documentUrl,
               ),
               IconMenu(
-                title: "Gallery",
+                title: "Logout",
                 icnUrl: galleryUrl,
-              ),
-              IconMenu(
-                title: "Certificate",
-                icnUrl: certificateUrl,
               ),
             ],
           ),
@@ -180,36 +176,32 @@ class MenuSidebar extends StatelessWidget {
             crossAxisCount: 4,
             children: <Widget>[
               IconMenu(
-                title: "My Course",
+                title: "Hot Chat",
                 icnUrl: myCourseUrl,
               ),
               IconMenu(
-                title: "My Zoom",
+                title: "Policy",
                 icnUrl: zoomUrl,
               ),
               IconMenu(
-                title: "My Library",
+                title: "Help",
                 icnUrl: libraryUrl,
               ),
               IconMenu(
-                title: "Favorite",
+                title: "About",
                 icnUrl: favoriteUrl,
               ),
               IconMenu(
-                title: "Friend",
+                title: "Share App",
                 icnUrl: friendUrl,
               ),
               IconMenu(
-                title: "Document",
+                title: "Dark Mode",
                 icnUrl: documentUrl,
               ),
               IconMenu(
-                title: "Gallery",
+                title: "Language",
                 icnUrl: galleryUrl,
-              ),
-              IconMenu(
-                title: "Certificate",
-                icnUrl: certificateUrl,
               ),
             ],
           ),
