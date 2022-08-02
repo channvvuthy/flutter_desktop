@@ -1,32 +1,22 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/controllers/auth_controller.dart';
 import 'package:flutter_desktop/screen/partials/sidebar/icon_menu.dart';
+import 'package:flutter_desktop/screen/partials/sidebar/menu_title.dart';
 import 'package:get/get.dart';
 
 class MenuSidebar extends StatelessWidget {
-  const MenuSidebar({Key? key}) : super(key: key);
+  MenuSidebar({Key? key}) : super(key: key);
+  AuthController authCtrl = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "study_and_sharing".tr,
-            style: TextStyle(color: PRIMARY_COLOR),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        MenuTitle(title: "study_and_sharing"),
         SizedBox(
           height: 180,
           child: GridView.count(
@@ -76,19 +66,7 @@ class MenuSidebar extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "report".tr,
-            style: TextStyle(color: PRIMARY_COLOR),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        MenuTitle(title: "report"),
         SizedBox(
           height: 90,
           child: GridView.count(
@@ -118,19 +96,7 @@ class MenuSidebar extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "me_and_privacy".tr,
-            style: TextStyle(color: PRIMARY_COLOR),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        MenuTitle(title: "me_and_privacy"),
         SizedBox(
           height: 180,
           child: GridView.count(
@@ -170,24 +136,14 @@ class MenuSidebar extends StatelessWidget {
               IconMenu(
                 title: "logout".tr,
                 icnUrl: logoutUrl,
-                onTap: () {},
+                onTap: () async {
+                  await authCtrl.logout();
+                },
               ),
             ],
           ),
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "e_school".tr,
-            style: TextStyle(color: PRIMARY_COLOR),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        MenuTitle(title: "e_school"),
         SizedBox(
           height: 180,
           child: GridView.count(
@@ -226,7 +182,7 @@ class MenuSidebar extends StatelessWidget {
               ),
               IconMenu(
                 title: "language".tr,
-                icnUrl: Get.locale?.languageCode == "en" ? enUrl : khUrl,
+                icnUrl: Get.locale?.languageCode == "en" ? khUrl : enUrl,
                 onTap: () {
                   if (Get.locale?.languageCode == "en") {
                     var locale = Locale('kh', 'kh_KM');

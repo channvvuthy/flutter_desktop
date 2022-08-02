@@ -26,7 +26,7 @@ class MainScreen extends StatelessWidget {
                     )),
                 Container(
                   padding: EdgeInsets.only(left: 80),
-                  height: 120,
+                  height: 110,
                   width: settingCtr.isMenuOpen.isTrue
                       ? screenWidth - 350
                       : screenWidth,

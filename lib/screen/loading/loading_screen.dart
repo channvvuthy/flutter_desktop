@@ -26,13 +26,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
   int startLoading = 0;
 
   loginOrHome() async {
-    String token = await LocalStorage.getItem("xtoken");
-    var login = await LocalStorage.getItem("user");
-    LoginResponse auth = LoginResponse.fromJson(jsonDecode(login));
-
+    String token = await LocalStorage.getItem("xtoken") ?? "";
     AuthController authCtrl = Get.put(AuthController());
 
-    if (token != null) {
+    if (token != "") {
+      var login = await LocalStorage.getItem("user");
+      LoginResponse auth = LoginResponse.fromJson(jsonDecode(login));
+
       authCtrl.setLoginStatus(true);
       authCtrl.setAuthenticationUser(auth);
       authCtrl.setToken(token);

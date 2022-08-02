@@ -1,20 +1,17 @@
-// ignore_for_file: unused_catch_clause, empty_catches, prefer_const_constructors, avoid_print, unused_field, unnecessary_null_comparison
-
 import 'package:dio/dio.dart';
 import 'package:flutter_desktop/config/config.dart';
 
 import 'dio_exception.dart';
-// import 'package:flutter_desktop/helper/local_storage.dart';
 
 class DioService {
   late final Dio _dio;
-  late String _xtoken;
+  late String _xtoken = "";
 
   var headers = {"accept": "application/json", "Authorization": basicAuth};
 
   initializeInterceptor() async {
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-      if (_xtoken != null) {
+      if (_xtoken != "") {
         options.headers.addAll({"xtoken": _xtoken});
       }
 
@@ -42,7 +39,6 @@ class DioService {
       final errorMessage = DioException.fromDioError(err).toString();
       throw errorMessage;
     } catch (e) {
-      print(e);
       throw e.toString();
     }
   }
@@ -54,7 +50,6 @@ class DioService {
       final errorMessage = DioException.fromDioError(err).toString();
       throw errorMessage;
     } catch (e) {
-      print(e);
       throw e.toString();
     }
   }
