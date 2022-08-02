@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
@@ -6,6 +6,7 @@ import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/auth_controller.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:clipboard/clipboard.dart';
 
 class ProfileInfo extends StatefulWidget {
   const ProfileInfo({Key? key}) : super(key: key);
@@ -75,10 +76,59 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     child: InkWell(
                       onTap: () {
                         Get.defaultDialog(
+                            titlePadding: EdgeInsets.only(top: 20),
+                            titleStyle: TextStyle(color: PRIMARY_COLOR),
                             title: "my_qr".tr,
                             content: Column(
                               children: [
-                                Text(authCtrl.qrCodeResponse.profileUrl)
+                                Text("Scan here to add friend"),
+                                SizedBox(
+                                  width: 300,
+                                  child: Image.network(
+                                      authCtrl.qrCodeResponse.qrcodeUrl),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        FlutterClipboard.copy(authCtrl
+                                                .qrCodeResponse.profileUrl)
+                                            .then((value) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text("Copied")));
+                                          Get.back();
+                                        });
+                                      },
+                                      child: Container(
+                                          width: 260,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              color: PRIMARY_COLOR,
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                copyUrl,
+                                                color: WHITE_COLOR,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "Copy",
+                                                style: TextStyle(
+                                                    color: WHITE_COLOR),
+                                              )
+                                            ],
+                                          )),
+                                    )
+                                  ],
+                                )
                               ],
                             ));
                       },

@@ -6,6 +6,7 @@ import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/home_controller.dart';
 import 'package:flutter_desktop/controllers/login_controller.dart';
 import 'package:flutter_desktop/helper/validate.dart';
+import 'package:flutter_desktop/screen/auth/register_screen.dart';
 import 'package:flutter_desktop/widgets/button_bg.dart';
 import 'package:flutter_desktop/widgets/input_border_only_bottom.dart';
 import 'package:get/get.dart';
@@ -76,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   InputBorderOnlyBottom(
-                                      placeholder: "Phone number",
+                                      placeholder: "phone_number".tr,
                                       svgUrl: phoneUrl,
                                       controller: phone),
                                   SizedBox(
@@ -84,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   InputBorderOnlyBottom(
                                       isSecure: true,
-                                      placeholder: "Password",
+                                      placeholder: "password".tr,
                                       svgUrl: lockUrl,
                                       controller: password),
                                   SizedBox(
@@ -95,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         EdgeInsets.symmetric(horizontal: 20),
                                     alignment: Alignment.topRight,
                                     child: Text(
-                                      "Forget Password?",
+                                      "forget_password".tr,
                                       style: TextStyle(color: FORGET_PASS),
                                     ),
                                   ),
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: ButtonBg(
                                         isLoading: loginCtrl.isLoading.value,
-                                        txt: "Login",
+                                        txt: "login".tr,
                                         onTap: () {
                                           if (validate(
                                             {
@@ -142,11 +143,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Text("Don’t have an account?"),
-                                        Text(
-                                          "  Sign Up",
-                                          style:
-                                              TextStyle(color: PRIMARY_COLOR),
+                                        Text("no_account".tr),
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(() => RegisterScreen());
+                                          },
+                                          child: Text(
+                                            " ${"sign_up".tr}",
+                                            style:
+                                                TextStyle(color: PRIMARY_COLOR),
+                                          ),
                                         )
                                       ],
                                     ),

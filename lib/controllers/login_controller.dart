@@ -40,14 +40,14 @@ class LoginController extends GetxController {
       isLoading.value = false;
 
       switch (response.data["status"]) {
-        case 1:
-          validateDialog(response.data["msg"].toString().tr);
-          break;
         case 0:
           dioService.setToken(response.data["data"]["token"]);
           LocalStorage.setItem("xtoken", response.data["data"]["token"]);
           LocalStorage.setItem("user", jsonEncode(response.data["data"]));
           Get.to(() => const LoadingScreen());
+          break;
+        default:
+          validateDialog(response.data["msg"].toString().tr);
           break;
       }
     } catch (e) {

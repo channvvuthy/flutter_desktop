@@ -31,4 +31,6 @@ const enUrl = "assets/svg/en.svg";
 const khUrl = "assets/svg/kh.svg";
 const homeThinUrl = "assets/svg/home_thin.svg";
 const parthnerThinUrl = "assets/svg/parthner_thin.svg";
+const copyUrl = "assets/svg/copy.svg";
+const userUrl = "assets/svg/user.svg";
 const footerUrl = "assets/img/e-footer.png";

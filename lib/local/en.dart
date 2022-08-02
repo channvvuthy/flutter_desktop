@@ -65,4 +65,18 @@ const en = {
   "library": "Library",
   "parthner": "Parthner",
   "zoom": "Zoom",
+  "create_account": "Create Account",
+  "phone_number": "Phone Number",
+  "password": "Password",
+  "no_account": "Don't have an account?",
+  "sign_up": "Sign Up",
+  "forget_password": "Forget Password?",
+  "login": "Login",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "confirm_password": "Confirm Password",
+  "accept": "Accept",
+  "privacy": "Term & Condition",
+  "male": "Male",
+  "female": "Female"
 };

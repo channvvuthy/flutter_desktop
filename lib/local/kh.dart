@@ -65,4 +65,18 @@ const kh = {
   "library": "សៀវភៅ",
   "parthner": "ដៃគូ",
   "zoom": "Zoom",
+  "create_account": "បង្កើតគណនេយ្យ",
+  "phone_number": "លេខទូរស័ព្ទ",
+  "password": "ពាក្យសម្ងាត",
+  "no_account": "មិនទាន់មានគណនេ្យ?",
+  "sign_up": "ចុះឈ្មោះ",
+  "forget_password": "ភ្លេចពាក្យសម្ងាត់",
+  "login": "ចូលគណនេយ្យ",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "confirm_password": "បញ្ជាក់ពាក្យសម្ងាត់",
+  "accept": "យល់ព្រម",
+  "privacy": "គោលការណ៏របស់យើង",
+  "male": "ប្រុស",
+  "female": "ស្រី"
 };
