@@ -54,9 +54,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
       LoginResponse auth = LoginResponse.fromJson(json);
 
+      authCtrl.setToken(token);
       authCtrl.setLoginStatus(true);
       authCtrl.setAuthenticationUser(auth);
-      authCtrl.setToken(token);
 
       Get.to(() => HomeScreen());
     } else {

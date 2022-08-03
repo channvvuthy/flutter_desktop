@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_desktop/config/config.dart';
+import 'package:flutter_desktop/helper/local_storage.dart';
 
 import 'dio_exception.dart';
 
@@ -27,7 +28,16 @@ class DioService {
     _xtoken = token;
   }
 
+  getToken() async {
+    var token = await LocalStorage.getItem("xtoken");
+
+    if (token != null) {
+      _xtoken = token;
+    }
+  }
+
   void init() {
+    getToken();
     _dio = Dio(BaseOptions(baseUrl: baseUrl, headers: headers));
     initializeInterceptor();
   }
