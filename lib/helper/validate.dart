@@ -8,7 +8,7 @@ bool validate(Map params) {
     if (params[key].containsKey("validate")) {
       var vl = params[key]['validate'];
 
-      if (vl.containsKey("required") && params[key]["value"].isEmpty) {
+      if ((vl.containsKey("required") && params[key]["value"].isEmpty)) {
         validateDialog("Field $key is required");
         return false;
       }
@@ -20,16 +20,26 @@ bool validate(Map params) {
       }
 
       if (vl.containsKey("max") && vl["max"] < params[key]["value"].length) {
-        validateDialog("Field $key must be less than " + vl["min"].toString());
+        validateDialog(
+            "Field $key.replaceAll(find, replaceWith); must be less than " +
+                vl["min"].toString());
         return false;
       }
 
       if (vl.containsKey("phone")) {
-        String regexPattern = r'^(?:[+0]9)?[0-9]{9}$';
+        String regexPattern = r'^(?:[+0][1-9])?[0-9]{9,12}$';
         var regExp = RegExp(regexPattern);
 
         if (regExp.hasMatch(params[key]["value"]) == false) {
           validateDialog("Invalid phone number");
+          return false;
+        }
+      }
+
+      if (vl.containsKey("confirm_password")) {
+        if (params["confirm_password"]["value"] !=
+            params["password"]["value"]) {
+          validateDialog("Confirm password not match with password");
           return false;
         }
       }

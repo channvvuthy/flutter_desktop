@@ -18,8 +18,8 @@ class LoginResponse {
     required this.gender,
     required this.photo,
     required this.story,
-    required this.school,
-    required this.province,
+    this.school,
+    this.province,
     required this.dateOfBirth,
     required this.token,
     required this.inCart,
@@ -33,9 +33,9 @@ class LoginResponse {
   String gender;
   String photo;
   String story;
-  Province school;
-  Province province;
-  DateTime dateOfBirth;
+  Province? school;
+  Province? province;
+  String dateOfBirth;
   String token;
   int inCart;
   int acceptedPostPolicy;
@@ -50,7 +50,7 @@ class LoginResponse {
         story: json["story"],
         school: Province.fromJson(json["school"]),
         province: Province.fromJson(json["province"]),
-        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"],
         token: json["token"],
         inCart: json["in_cart"],
         acceptedPostPolicy: json["accepted_post_policy"],
@@ -64,10 +64,9 @@ class LoginResponse {
         "gender": gender,
         "photo": photo,
         "story": story,
-        "school": school.toJson(),
-        "province": province.toJson(),
-        "date_of_birth":
-            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "school": school?.toJson(),
+        "province": province?.toJson(),
+        "date_of_birth": dateOfBirth,
         "token": token,
         "in_cart": inCart,
         "accepted_post_policy": acceptedPostPolicy,

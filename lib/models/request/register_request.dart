@@ -23,11 +23,12 @@ class RegisterRequest {
     required this.deviceOs,
     required this.playerId,
     required this.appVersion,
+    required int acceptedPostPolicy,
   });
 
   String lastName;
   String firstName;
-  int phone;
+  String phone;
   String password;
   String confirmPassword;
   String gender;
@@ -50,6 +51,7 @@ class RegisterRequest {
         deviceOs: json["device_os"],
         playerId: json["player_id"],
         appVersion: json["app_version"],
+        acceptedPostPolicy: 0,
       );
 
   Map<String, dynamic> toJson() => {

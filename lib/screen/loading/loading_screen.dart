@@ -12,6 +12,7 @@ import 'package:flutter_desktop/models/response/login_response.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
 import 'package:flutter_desktop/screen/home/home_screen.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -31,7 +32,27 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     if (token != "") {
       var login = await LocalStorage.getItem("user");
-      LoginResponse auth = LoginResponse.fromJson(jsonDecode(login));
+      var json = jsonDecode(login);
+
+      if (json["province"] == null) {
+        Province province = Province(id: "", name: "");
+        json["province"] = province.toJson();
+      }
+
+      if (json["school"] == null) {
+        Province school = Province(id: "", name: "");
+        json["school"] = school.toJson();
+      }
+
+      if (json["date_of_birth"] == null) {
+        json["date_of_birth"] = DateTime.now().toString();
+      }
+
+      if (json["in_cart"] == null) {
+        json["in_cart"] = 0;
+      }
+
+      LoginResponse auth = LoginResponse.fromJson(json);
 
       authCtrl.setLoginStatus(true);
       authCtrl.setAuthenticationUser(auth);

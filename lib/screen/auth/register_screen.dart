@@ -1,18 +1,19 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/home_controller.dart';
-import 'package:flutter_desktop/controllers/login_controller.dart';
+import 'package:flutter_desktop/controllers/register_controller.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
 import 'package:flutter_desktop/helper/validate.dart';
 import 'package:flutter_desktop/widgets/button_bg.dart';
 import 'package:flutter_desktop/widgets/input_border_only_bottom.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -20,11 +21,30 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   HomeController homeController = HomeController();
-  LoginController loginCtrl = Get.put(LoginController());
+  RegisterController registerCtrl = Get.put(RegisterController());
+
+  TextEditingController first_name = TextEditingController();
+  TextEditingController last_name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirm_password = TextEditingController();
+  String gender = "M";
+  String accepted_post_policy = "";
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(
+        Uri.parse("https://admin.e-schoolcambodia.com/page/social_privacy"))) {
+      throw 'Could not launch';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController phone = TextEditingController();
-    TextEditingController password = TextEditingController();
     return Obx(() => Scaffold(
           body: Center(
               child: Column(
@@ -85,15 +105,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   InputBorderOnlyBottom(
                                       placeholder: "last_name".tr,
                                       svgUrl: userUrl,
-                                      controller: phone),
+                                      controller: last_name),
                                   SizedBox(
                                     height: 30,
                                   ),
                                   InputBorderOnlyBottom(
-                                      isSecure: true,
                                       placeholder: "first_name".tr,
                                       svgUrl: userUrl,
-                                      controller: password),
+                                      controller: first_name),
                                   SizedBox(
                                     height: 30,
                                   ),
@@ -102,9 +121,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       width: 150,
                                       child: ListTile(
                                           leading: Radio(
-                                            groupValue: 1,
-                                            value: 0,
-                                            onChanged: (value) {},
+                                            groupValue: gender,
+                                            value: "M",
+                                            onChanged: (value) {
+                                              setState(() {
+                                                gender = value.toString();
+                                              });
+                                            },
                                           ),
                                           title: Text("male".tr)),
                                     ),
@@ -112,9 +135,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       width: 150,
                                       child: ListTile(
                                           leading: Radio(
-                                            groupValue: 1,
-                                            value: 1,
-                                            onChanged: (value) {},
+                                            groupValue: gender,
+                                            value: "F",
+                                            onChanged: (value) {
+                                              setState(() {
+                                                gender = value.toString();
+                                              });
+                                            },
                                           ),
                                           title: Text("female".tr)),
                                     )
@@ -122,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   InputBorderOnlyBottom(
                                       placeholder: "phone_number".tr,
                                       svgUrl: phoneUrl,
-                                      controller: password),
+                                      controller: phone),
                                   SizedBox(
                                     height: 30,
                                   ),
@@ -138,15 +165,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       isSecure: true,
                                       placeholder: "confirm_password".tr,
                                       svgUrl: lockUrl,
-                                      controller: password),
+                                      controller: confirm_password),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   ListTile(
                                     leading: Radio(
-                                      groupValue: 2,
-                                      value: 0,
-                                      onChanged: (value) {},
+                                      groupValue: accepted_post_policy,
+                                      value: "accept",
+                                      onChanged: (value) {
+                                        setState(() {
+                                          accepted_post_policy = "accept";
+                                        });
+                                      },
                                     ),
                                     title: Row(
                                       children: [
@@ -157,7 +188,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                         Text(" "),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () async {
+                                            _launchUrl();
+                                          },
                                           child: Text(
                                             "privacy".tr,
                                             style: TextStyle(
@@ -175,11 +208,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: ButtonBg(
-                                        isLoading: loginCtrl.isLoading.value,
+                                        isLoading: registerCtrl.isLoading.value,
                                         txt: "sign_up".tr,
                                         onTap: () {
                                           if (validate(
                                             {
+                                              'firstName': {
+                                                'value': first_name.text,
+                                                'validate': {
+                                                  'required': true,
+                                                }
+                                              },
+                                              'lastName': {
+                                                'value': last_name.text,
+                                                'validate': {
+                                                  'required': true,
+                                                }
+                                              },
                                               'phone': {
                                                 'value': phone.text,
                                                 'validate': {
@@ -195,10 +240,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   "min": 6,
                                                 }
                                               },
+                                              'confirm_password': {
+                                                'value': confirm_password.text,
+                                                'validate': {
+                                                  'required': true,
+                                                  'confirm_password': true
+                                                }
+                                              },
+                                              'term_and_condition': {
+                                                'value': accepted_post_policy,
+                                                'validate': {
+                                                  'required': true,
+                                                }
+                                              },
                                             },
                                           )) {
-                                            loginCtrl.login(
-                                                phone.text, password.text);
+                                            registerCtrl.register(
+                                                phone.text,
+                                                password.text,
+                                                confirm_password.text,
+                                                first_name.text,
+                                                last_name.text,
+                                                gender);
                                           }
                                         }),
                                   ),
