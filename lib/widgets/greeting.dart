@@ -20,7 +20,6 @@ class _GreetingState extends State<Greeting> {
   @override
   void initState() {
     super.initState();
-    print(authCtrl.auth);
   }
 
   @override
