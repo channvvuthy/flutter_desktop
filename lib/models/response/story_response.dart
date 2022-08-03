@@ -21,14 +21,14 @@ class StoryResponse {
   String id;
   User user;
   Photo photo;
-  DateTime date;
+  String date;
   int type;
 
   factory StoryResponse.fromJson(Map<String, dynamic> json) => StoryResponse(
         id: json["_id"],
         user: User.fromJson(json["user"]),
         photo: Photo.fromJson(json["photo"]),
-        date: DateTime.parse(json["date"]),
+        date: json["date"] ?? "",
         type: json["type"],
       );
 
@@ -36,7 +36,7 @@ class StoryResponse {
         "_id": id,
         "user": user.toJson(),
         "photo": photo.toJson(),
-        "date": date.toIso8601String(),
+        "date": date,
         "type": type,
       };
 }
@@ -53,7 +53,7 @@ class Photo {
   int height;
 
   factory Photo.fromJson(Map<String, dynamic> json) => Photo(
-        url: json["url"],
+        url: json["url"] ?? "",
         width: json["width"],
         height: json["height"],
       );

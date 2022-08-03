@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
+import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/story_controller.dart';
+import 'package:flutter_desktop/models/response/story_response.dart';
 import 'package:get/get.dart';
 
 class HomeStory extends StatefulWidget {
@@ -23,31 +25,58 @@ class _HomeStoryState extends State<HomeStory> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SizedBox(
-          height: 180,
-          width: double.infinity,
+    return Obx(() => Container(
+          height: 150,
           child: storyCtrl.isLoading.isTrue
-              ? Text("Loading")
-              : ListView(
+              ? Text("data")
+              : ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(12.0),
-                  children: [
-                    Container(
-                      width: 140,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: Color.fromARGB(66, 117, 115, 115)),
-                          borderRadius: BorderRadius.circular(8),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.transparent, Colors.black26],
-                          )),
-                      child: const Center(child: Text('Entry A')),
-                    )
-                  ],
-                ),
+                  shrinkWrap: true,
+                  physics: ScrollPhysics(),
+                  itemCount: storyCtrl.stories.length,
+                  itemBuilder: (((context, index) {
+                    StoryResponse story =
+                        StoryResponse.fromJson(storyCtrl.stories[index]);
+                    return Column(children: [
+                      Container(
+                        clipBehavior: Clip.hardEdge,
+                        margin: EdgeInsets.only(right: 15),
+                        padding: EdgeInsets.only(left: 10, top: 10),
+                        width: 120,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: story.photo.url != ""
+                                    ? NetworkImage(story.photo.url)
+                                    : AssetImage(eschoolUrl) as ImageProvider),
+                            borderRadius: BorderRadius.circular(12.0),
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: const [
+                                Colors.black26,
+                                Colors.black26,
+                              ],
+                            )),
+                        child: Stack(children: [
+                          Container(
+                              clipBehavior: Clip.hardEdge,
+                              margin: EdgeInsets.only(right: 15),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 4, color: FB_COLOR),
+                                image: DecorationImage(
+                                    image: story.user.photo != ""
+                                        ? NetworkImage(story.user.photo)
+                                        : AssetImage(eschoolUrl)
+                                            as ImageProvider),
+                                borderRadius: BorderRadius.circular(80),
+                              )),
+                        ]),
+                      )
+                    ]);
+                  }))),
         ));
   }
 }
