@@ -78,5 +78,6 @@ const en = {
   "accept": "Accept",
   "privacy": "Term & Condition",
   "male": "Male",
-  "female": "Female"
+  "female": "Female",
+  "see_more": "See More"
 };

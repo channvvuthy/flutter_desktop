@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   SettingController settingCtr =
       Get.put<SettingController>(SettingController());
   StoryController storyCtr = Get.put(StoryController());
+  ScrollController scrollCtrHome = ScrollController();
 
   @override
   void initState() {
@@ -59,17 +60,22 @@ class _MainScreenState extends State<MainScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 15),
                     child: Greeting(),
                   ),
-                  HomeStory(),
                 ],
               ),
-            )
+            ),
+            Expanded(
+                child: ListView(
+              controller: scrollCtrHome,
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              children: [HomeStory()],
+            ))
           ],
         ));
   }

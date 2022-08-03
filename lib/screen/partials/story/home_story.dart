@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:flutter_desktop/constant/color.dart';
-import 'package:flutter_desktop/constant/url.dart';
+import 'package:flutter_desktop/controllers/auth_controller.dart';
 import 'package:flutter_desktop/controllers/story_controller.dart';
 import 'package:flutter_desktop/models/response/story_response.dart';
+import 'package:flutter_desktop/screen/partials/story/auth_story.dart';
+import 'package:flutter_desktop/screen/partials/story/loading_story.dart';
+import 'package:flutter_desktop/screen/partials/story/user_story.dart';
 import 'package:get/get.dart';
 
 class HomeStory extends StatefulWidget {
@@ -16,6 +18,8 @@ class HomeStory extends StatefulWidget {
 
 class _HomeStoryState extends State<HomeStory> {
   StoryController storyCtrl = Get.put(StoryController());
+  AuthController authCtrl = Get.put(AuthController());
+  ScrollController scrollStory = ScrollController();
 
   @override
   void initState() {
@@ -25,58 +29,46 @@ class _HomeStoryState extends State<HomeStory> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Container(
-          height: 150,
-          child: storyCtrl.isLoading.isTrue
-              ? Text("data")
-              : ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemCount: storyCtrl.stories.length,
-                  itemBuilder: (((context, index) {
-                    StoryResponse story =
-                        StoryResponse.fromJson(storyCtrl.stories[index]);
-                    return Column(children: [
-                      Container(
-                        clipBehavior: Clip.hardEdge,
-                        margin: EdgeInsets.only(right: 15),
-                        padding: EdgeInsets.only(left: 10, top: 10),
-                        width: 120,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: story.photo.url != ""
-                                    ? NetworkImage(story.photo.url)
-                                    : AssetImage(eschoolUrl) as ImageProvider),
-                            borderRadius: BorderRadius.circular(12.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: const [
-                                Colors.black26,
-                                Colors.black26,
-                              ],
-                            )),
-                        child: Stack(children: [
-                          Container(
-                              clipBehavior: Clip.hardEdge,
-                              margin: EdgeInsets.only(right: 15),
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 4, color: FB_COLOR),
-                                image: DecorationImage(
-                                    image: story.user.photo != ""
-                                        ? NetworkImage(story.user.photo)
-                                        : AssetImage(eschoolUrl)
-                                            as ImageProvider),
-                                borderRadius: BorderRadius.circular(80),
-                              )),
-                        ]),
-                      )
-                    ]);
-                  }))),
-        ));
+    return Container(
+      padding: EdgeInsets.only(left: 20),
+      height: 185,
+      child: Row(children: [
+        Container(
+          child: AuthStory(),
+        ),
+        Obx(() => Expanded(
+            child: storyCtrl.isLoading.isTrue
+                ? ListView.builder(
+                    controller: scrollStory,
+                    scrollDirection: Axis.horizontal,
+                    physics: ScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: ((context, index) {
+                      return LoadingStory();
+                    }))
+                : ListView.builder(
+                    controller: scrollStory,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: storyCtrl.stories.length,
+                    physics: ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: ((context, index) {
+                      StoryResponse story =
+                          StoryResponse.fromJson(storyCtrl.stories[index]);
+                      if (index < (storyCtrl.stories.length - 1)) {
+                        return UserStory(story: story);
+                      } else {
+                        return Row(
+                          children: [
+                            UserStory(story: story),
+                            LoadingStory(
+                              isSeeMore: true,
+                            )
+                          ],
+                        );
+                      }
+                    }))))
+      ]),
+    );
   }
 }
