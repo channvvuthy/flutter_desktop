@@ -51,8 +51,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                   fit: BoxFit.cover,
                                   image: authCtrl.isLogin.value == true
                                       ? NetworkImage(authCtrl.auth.photo)
-                                      : AssetImage(
-                                              "assets/img/eschool-cambodia.png")
+                                      : AssetImage(eschoolUrl)
                                           as ImageProvider)),
                         ),
                         SizedBox(

@@ -1,39 +1,41 @@
 import 'dart:convert';
 
-StoryResponse storyResponseFromJson(String str) =>
-    StoryResponse.fromJson(json.decode(str));
+ViewStoryResponse viewStoryResponseFromJson(String str) =>
+    ViewStoryResponse.fromJson(json.decode(str));
 
-String storyResponseToJson(StoryResponse data) => json.encode(data.toJson());
+String viewStoryResponseToJson(ViewStoryResponse data) =>
+    json.encode(data.toJson());
 
-class StoryResponse {
-  StoryResponse({
-    required this.id,
-    required this.user,
+class ViewStoryResponse {
+  ViewStoryResponse({
     required this.photo,
+    required this.user,
     required this.date,
-    required this.type,
+    required this.view,
+    required this.viewers,
   });
 
-  String id;
-  User user;
   Photo photo;
+  User user;
   String date;
-  int type;
+  int view;
+  List<User> viewers;
 
-  factory StoryResponse.fromJson(Map<String, dynamic> json) => StoryResponse(
-        id: json["_id"],
-        user: User.fromJson(json["user"]),
+  factory ViewStoryResponse.fromJson(Map<String, dynamic> json) =>
+      ViewStoryResponse(
         photo: Photo.fromJson(json["photo"]),
-        date: json["date"] ?? "",
-        type: json["type"],
+        user: User.fromJson(json["user"]),
+        date: json["date"],
+        view: json["view"],
+        viewers: List<User>.from(json["viewers"].map((x) => User.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "_id": id,
-        "user": user.toJson(),
         "photo": photo.toJson(),
+        "user": user.toJson(),
         "date": date,
-        "type": type,
+        "view": view,
+        "viewers": List<dynamic>.from(viewers.map((x) => x.toJson())),
       };
 }
 
@@ -49,7 +51,7 @@ class Photo {
   int height;
 
   factory Photo.fromJson(Map<String, dynamic> json) => Photo(
-        url: json["url"] ?? "",
+        url: json["url"],
         width: json["width"],
         height: json["height"],
       );
