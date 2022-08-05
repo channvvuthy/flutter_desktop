@@ -11,14 +11,14 @@ class StoryResponse {
     required this.user,
     required this.photo,
     required this.date,
-    required this.type,
+    this.type,
   });
 
   String id;
   User user;
   Photo photo;
   String date;
-  int type;
+  int? type;
 
   factory StoryResponse.fromJson(Map<String, dynamic> json) => StoryResponse(
         id: json["_id"],

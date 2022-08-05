@@ -12,9 +12,11 @@ class StoryController extends GetxController {
   }
 
   RxBool isLoading = false.obs;
+  RxBool isViewing = false.obs;
   RxInt p = 0.obs;
 
   List stories = [];
+  Map story = {};
 
   getStory() async {
     isLoading.value = true;
@@ -44,6 +46,34 @@ class StoryController extends GetxController {
     } catch (e) {
       validateDialog(e.toString());
       isLoading.value = false;
+    }
+  }
+
+  viewStory(String id) async {
+    isViewing.value = true;
+    String queryString = "";
+
+    if (p > 0) {
+      queryString = "?p=$p&id=$id";
+    } else {
+      queryString = "?id=$id";
+    }
+
+    try {
+      var response = await dioService.get("story/view$queryString");
+      isViewing.value = false;
+      switch (response.data["status"]) {
+        case 0:
+          story = response.data["data"];
+          print(story);
+          break;
+        default:
+          validateDialog(response.data["msg"].toString().tr);
+          break;
+      }
+    } catch (e) {
+      validateDialog(e.toString());
+      isViewing.value = false;
     }
   }
 }

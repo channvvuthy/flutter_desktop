@@ -1,16 +1,18 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_constructors_in_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/dialog/custom_dialog.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
+import 'package:flutter_desktop/helper/url_helper.dart';
 import 'package:flutter_desktop/models/response/story_response.dart';
 import 'package:flutter_desktop/screen/partials/story/story_detail.dart';
 
 class UserStory extends StatelessWidget {
   final StoryResponse story;
-  const UserStory({Key? key, required this.story}) : super(key: key);
+  UserStory({Key? key, required this.story}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,8 @@ class UserStory extends StatelessWidget {
       onTap: () {
         showDialog(
             context: context,
-            builder: (context) => const CustomDialog(
-                  dialogWidget: StoryDetail(),
+            builder: (context) => CustomDialog(
+                  dialogWidget: StoryDetail(story: story),
                 ));
       },
       child: Container(
@@ -27,15 +29,9 @@ class UserStory extends StatelessWidget {
           Container(
             clipBehavior: Clip.hardEdge,
             margin: const EdgeInsets.only(right: 12),
-            padding: const EdgeInsets.only(left: 10, top: 10),
             width: 120,
             height: 150,
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: story.photo.url != ""
-                        ? NetworkImage(story.photo.url)
-                        : const AssetImage(eschoolUrl) as ImageProvider),
-                borderRadius: BorderRadius.circular(12.0),
                 gradient: const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -43,8 +39,23 @@ class UserStory extends StatelessWidget {
                     Colors.black26,
                     Colors.black26,
                   ],
-                )),
+                ),
+                borderRadius: BorderRadius.circular(12.0)),
             child: Stack(children: [
+              CachedNetworkImage(
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.high,
+                imageUrl: UrlHelper.url(story.photo.url),
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Container(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                      value: downloadProgress.progress),
+                ),
+                errorWidget: (context, url, error) => Image.asset(eschoolUrl),
+              ),
               Container(
                   clipBehavior: Clip.hardEdge,
                   margin: const EdgeInsets.only(right: 15),

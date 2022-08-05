@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
@@ -34,7 +34,10 @@ class _AuthStoryState extends State<AuthStory> {
           width: 120,
           height: 150,
           decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(authCtrl.auth.photo)),
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                  image: NetworkImage(authCtrl.auth.photo)),
               borderRadius: BorderRadius.circular(12.0),
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
@@ -57,7 +60,6 @@ class _AuthStoryState extends State<AuthStory> {
                   decoration: BoxDecoration(
                       color: PRIMARY_COLOR,
                       borderRadius: BorderRadius.circular(20)),
-                  // ignore: prefer_const_constructors
                   child: Icon(
                     Icons.add,
                     color: WHITE_COLOR,
