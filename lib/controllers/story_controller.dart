@@ -65,7 +65,6 @@ class StoryController extends GetxController {
       switch (response.data["status"]) {
         case 0:
           story = response.data["data"];
-          print(story);
           break;
         default:
           validateDialog(response.data["msg"].toString().tr);

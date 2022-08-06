@@ -56,11 +56,17 @@ class _HomeStoryState extends State<HomeStory> {
                       StoryResponse story =
                           StoryResponse.fromJson(storyCtrl.stories[index]);
                       if (index < (storyCtrl.stories.length - 1)) {
-                        return UserStory(story: story);
+                        return UserStory(
+                          story: story,
+                          index: index,
+                        );
                       } else {
                         return Row(
                           children: [
-                            UserStory(story: story),
+                            UserStory(
+                              story: story,
+                              index: index,
+                            ),
                             LoadingStory(
                               isSeeMore: true,
                             )

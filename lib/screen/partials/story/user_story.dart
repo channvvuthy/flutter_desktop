@@ -12,7 +12,9 @@ import 'package:flutter_desktop/screen/partials/story/story_detail.dart';
 
 class UserStory extends StatelessWidget {
   final StoryResponse story;
-  UserStory({Key? key, required this.story}) : super(key: key);
+  final int index;
+  UserStory({Key? key, required this.story, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,10 @@ class UserStory extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) => CustomDialog(
-                  dialogWidget: StoryDetail(story: story),
+                  dialogWidget: StoryDetail(
+                    story: story,
+                    index: index,
+                  ),
                 ));
       },
       child: Container(
@@ -52,7 +57,7 @@ class UserStory extends StatelessWidget {
                     Container(
                   alignment: Alignment.center,
                   child: CircularProgressIndicator(
-                      value: downloadProgress.progress),
+                      color: WHITE_COLOR, value: downloadProgress.progress),
                 ),
                 errorWidget: (context, url, error) => Image.asset(eschoolUrl),
               ),

@@ -13,9 +13,11 @@ import 'package:intl/intl.dart';
 
 class StoryDetail extends StatefulWidget {
   final StoryResponse story;
+  final int index;
   StoryDetail({
     Key? key,
     required this.story,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -24,11 +26,42 @@ class StoryDetail extends StatefulWidget {
 
 class _StoryDetailState extends State<StoryDetail> {
   StoryController storyCtrl = Get.put(StoryController());
+  int index = 0;
+  late StoryResponse story;
 
   @override
   void initState() {
     super.initState();
+
     storyCtrl.viewStory(widget.story.id);
+    index = widget.index;
+
+    setState(() {
+      story = widget.story;
+    });
+  }
+
+  void viewStory(int index) {
+    story = StoryResponse.fromJson(storyCtrl.stories[index]);
+    storyCtrl.viewStory(story.id);
+  }
+
+  void nextStory() {
+    if (storyCtrl.stories.length > index) {
+      setState(() {
+        index++;
+        viewStory(index);
+      });
+    }
+  }
+
+  void prevStory() {
+    if (index > 0) {
+      setState(() {
+        index--;
+        viewStory(index);
+      });
+    }
   }
 
   @override
@@ -62,8 +95,7 @@ class _StoryDetailState extends State<StoryDetail> {
                                   image: DecorationImage(
                                       filterQuality: FilterQuality.high,
                                       fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          widget.story.user.photo))),
+                                      image: NetworkImage(story.user.photo))),
                             ),
                             SizedBox(
                               width: 10,
@@ -100,7 +132,7 @@ class _StoryDetailState extends State<StoryDetail> {
                           physics: ScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           child: CachedNetworkImage(
-                            imageUrl: UrlHelper.url(widget.story.photo.url),
+                            imageUrl: UrlHelper.url(story.photo.url),
                             progressIndicatorBuilder:
                                 (context, url, downloadProgress) => Container(
                               alignment: Alignment.center,
@@ -147,6 +179,28 @@ class _StoryDetailState extends State<StoryDetail> {
               decoration: BoxDecoration(
                   color: ICON_COLOR, borderRadius: BorderRadius.circular(20)),
               child: Icon(Icons.close),
+            )),
+        Positioned(
+            right: 20,
+            bottom: 30,
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    prevStory();
+                  },
+                  child: Icon(Icons.navigate_before),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    nextStory();
+                  },
+                  child: Icon(Icons.navigate_next),
+                )
+              ],
             ))
       ]),
     );
