@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/helper/font_family.dart';

@@ -2,10 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
-import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/auth_controller.dart';
-import 'package:flutter_desktop/helper/font_family.dart';
-import 'package:flutter_desktop/models/response/login_response.dart';
 import 'package:get/get.dart';
 
 class AuthStory extends StatefulWidget {

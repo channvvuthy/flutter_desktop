@@ -12,7 +12,6 @@ import 'package:flutter_desktop/models/response/login_response.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
 import 'package:flutter_desktop/screen/home/home_screen.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);

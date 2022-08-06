@@ -13,15 +13,16 @@ class StoryController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isViewing = false.obs;
-  RxInt p = 0.obs;
+  RxInt p = 1.obs;
 
   List stories = [];
-  Map story = {};
+  RxMap story = {}.obs;
+  RxList viewer = [].obs;
 
   getStory() async {
     isLoading.value = true;
     String queryString = "";
-    if (p > 0) {
+    if (p > 1) {
       queryString = "?p=$p";
     }
 
@@ -30,7 +31,7 @@ class StoryController extends GetxController {
       isLoading.value = false;
       switch (response.data["status"]) {
         case 0:
-          if (p > 1) {
+          if (p.value > 1) {
             var list = response.data["data"];
             list.forEach((element) {
               stories.add(element);
@@ -53,7 +54,7 @@ class StoryController extends GetxController {
     isViewing.value = true;
     String queryString = "";
 
-    if (p > 0) {
+    if (p.value > 1) {
       queryString = "?p=$p&id=$id";
     } else {
       queryString = "?id=$id";
@@ -64,7 +65,16 @@ class StoryController extends GetxController {
       isViewing.value = false;
       switch (response.data["status"]) {
         case 0:
-          story = response.data["data"];
+          if (p.value > 1) {
+            if (response.data["data"]["viewer"].length > 0) {
+              response.data["data"]["viewer"].forEach((element) {
+                viewer.add(element);
+              });
+            }
+          } else {
+            viewer.value = response.data["data"]["viewer"];
+            story.value = response.data["data"];
+          }
           break;
         default:
           validateDialog(response.data["msg"].toString().tr);

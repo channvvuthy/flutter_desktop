@@ -8,58 +8,70 @@ String viewStoryResponseToJson(ViewStoryResponse data) =>
 
 class ViewStoryResponse {
   ViewStoryResponse({
+    required this.id,
+    required this.viewer,
     required this.photo,
-    required this.user,
     required this.date,
+    required this.v,
+    required this.s3Migrate,
     required this.view,
-    required this.viewers,
+    required this.user,
   });
 
+  String id;
+  List<User> viewer;
   Photo photo;
-  User user;
   String date;
+  int v;
+  int s3Migrate;
   int view;
-  List<User> viewers;
+  User user;
 
   factory ViewStoryResponse.fromJson(Map<String, dynamic> json) =>
       ViewStoryResponse(
+        id: json["_id"],
+        viewer: List<User>.from(json["viewer"].map((x) => User.fromJson(x))),
         photo: Photo.fromJson(json["photo"]),
-        user: User.fromJson(json["user"]),
         date: json["date"],
+        v: json["__v"],
+        s3Migrate: json["s3_migrate"],
         view: json["view"],
-        viewers: List<User>.from(json["viewers"].map((x) => User.fromJson(x))),
+        user: User.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
+        "_id": id,
+        "viewer": List<dynamic>.from(viewer.map((x) => x.toJson())),
         "photo": photo.toJson(),
-        "user": user.toJson(),
         "date": date,
+        "__v": v,
+        "s3_migrate": s3Migrate,
         "view": view,
-        "viewers": List<dynamic>.from(viewers.map((x) => x.toJson())),
+        "user": user.toJson(),
       };
 }
 
 class Photo {
   Photo({
-    required this.url,
     required this.width,
     required this.height,
+    required this.url,
   });
 
-  String url;
   int width;
   int height;
+  String url;
 
   factory Photo.fromJson(Map<String, dynamic> json) => Photo(
-        url: json["url"],
         width: json["width"],
         height: json["height"],
+        url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
-        "url": url,
         "width": width,
         "height": height,
+        "url": url,
       };
 }
 
