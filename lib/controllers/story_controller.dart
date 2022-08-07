@@ -18,6 +18,7 @@ class StoryController extends GetxController {
   List stories = [];
   RxMap story = {}.obs;
   RxList viewer = [].obs;
+  RxBool isEnableScroll = true.obs;
 
   getStory() async {
     isLoading.value = true;
@@ -70,6 +71,8 @@ class StoryController extends GetxController {
               response.data["data"]["viewer"].forEach((element) {
                 viewer.add(element);
               });
+            } else {
+              isEnableScroll.value = false;
             }
           } else {
             viewer.value = response.data["data"]["viewer"];
