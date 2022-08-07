@@ -25,7 +25,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    storyCtr.getStory();
+    Future.delayed(Duration.zero, () {
+      storyCtr.getStory();
+    });
   }
 
   @override

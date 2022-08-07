@@ -24,7 +24,10 @@ class _HomeStoryState extends State<HomeStory> {
   @override
   void initState() {
     super.initState();
-    storyCtrl.getStory();
+
+    Future.delayed(Duration.zero, () {
+      storyCtrl.getStory();
+    });
   }
 
   @override

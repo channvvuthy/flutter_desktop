@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
+import 'package:flutter_desktop/screen/gallery/gallery_screen.dart';
 import 'package:get/get.dart';
 
 class LoadingStory extends StatelessWidget {
@@ -31,7 +32,9 @@ class LoadingStory extends StatelessWidget {
             )),
         child: isSeeMore == true
             ? InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const GalleryScreen());
+                },
                 child: Text(
                   "see_more".tr,
                   style: TextStyle(fontFamily: fontFamiliy()),

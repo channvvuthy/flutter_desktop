@@ -80,5 +80,6 @@ const en = {
   "male": "Male",
   "female": "Female",
   "see_more": "See More",
-  "views": "Viewers"
+  "views": "Viewers",
+  "all_story": "All Story"
 };

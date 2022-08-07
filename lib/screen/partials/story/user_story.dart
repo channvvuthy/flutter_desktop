@@ -63,7 +63,7 @@ class UserStory extends StatelessWidget {
               ),
               Container(
                   clipBehavior: Clip.hardEdge,
-                  margin: const EdgeInsets.only(right: 15),
+                  margin: const EdgeInsets.only(left: 5, top: 5),
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(

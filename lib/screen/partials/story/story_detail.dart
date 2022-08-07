@@ -216,22 +216,32 @@ class _StoryDetailState extends State<StoryDetail> {
                                                       Expanded(
                                                         flex: 0,
                                                         child: Visibility(
-                                                            child: ListTile(
-                                                          onTap: () {
-                                                            storyCtrl
-                                                                .isEnableScroll
-                                                                .value = true;
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          trailing:
-                                                              Icon(Icons.close),
-                                                          title: countViewer(
-                                                              storyCtrl.story
-                                                                  .value['view']
-                                                                  .toString()),
-                                                        )),
+                                                            child: Obx(
+                                                                () => ListTile(
+                                                                      onTap:
+                                                                          () {
+                                                                        storyCtrl
+                                                                            .isEnableScroll
+                                                                            .value = true;
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                      },
+                                                                      trailing: storyCtrl
+                                                                              .isViewing
+                                                                              .isTrue
+                                                                          ? SizedBox(
+                                                                              width: 25,
+                                                                              height: 25,
+                                                                              child: CircularProgressIndicator(),
+                                                                            )
+                                                                          : Icon(
+                                                                              Icons.close),
+                                                                      title: countViewer(storyCtrl
+                                                                          .story
+                                                                          .value[
+                                                                              'view']
+                                                                          .toString()),
+                                                                    ))),
                                                       ),
                                                       Expanded(
                                                         flex: 1,
@@ -279,7 +289,7 @@ class _StoryDetailState extends State<StoryDetail> {
                                                                             color:
                                                                                 ICON_COLOR,
                                                                             image:
-                                                                                DecorationImage(image: NetworkImage(UrlHelper.url(currentStory["photo"])))),
+                                                                                DecorationImage(image: currentStory["photo"] == null ? AssetImage(eschoolUrl) as ImageProvider : NetworkImage(UrlHelper.url(currentStory["photo"])))),
                                                                       ));
                                                                 }))),
                                                       )

@@ -19,6 +19,7 @@ class StoryController extends GetxController {
   RxMap story = {}.obs;
   RxList viewer = [].obs;
   RxBool isEnableScroll = true.obs;
+  RxBool isAuth = false.obs;
 
   getStory() async {
     isLoading.value = true;
