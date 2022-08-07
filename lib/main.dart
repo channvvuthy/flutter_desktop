@@ -5,6 +5,7 @@ import 'package:flutter_desktop/config/config.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/local/local_tran.dart';
 import 'package:flutter_desktop/screen/auth/login_screen.dart';
+import 'package:flutter_desktop/screen/auth/profile_screen.dart';
 import 'package:flutter_desktop/screen/auth/register_screen.dart';
 import 'package:flutter_desktop/screen/gallery/gallery_screen.dart';
 import 'package:flutter_desktop/screen/home/home_screen.dart';
@@ -32,6 +33,7 @@ void main() async {
       GetPage(name: "/home_screen", page: () => HomeScreen()),
       GetPage(name: "/register_screen", page: () => RegisterScreen()),
       GetPage(name: "/gallery_screen", page: () => GalleryScreen()),
+      GetPage(name: "/profile_screen", page: () => ProfileScreen()),
     ],
   ));
 }

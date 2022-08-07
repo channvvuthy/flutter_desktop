@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/controllers/setting_controller.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
-import 'package:flutter_desktop/screen/gallery/gallery_screen_list.dart';
-import 'package:flutter_desktop/screen/partials/sidebar/sidebar_partial.dart';
 import 'package:flutter_desktop/screen/partials/widgets/box_shadow.dart';
 import 'package:get/get.dart';
 
-class GalleryScreen extends StatefulWidget {
-  const GalleryScreen({
+class BackHeader extends StatefulWidget {
+  final String title;
+  const BackHeader({
     Key? key,
+    required this.title,
   }) : super(key: key);
 
   @override
-  State<GalleryScreen> createState() => _GalleryScreenState();
+  State<BackHeader> createState() => _BackHeaderState();
 }
 
-class _GalleryScreenState extends State<GalleryScreen> {
+class _BackHeaderState extends State<BackHeader> {
   SettingController settingCtr = Get.put(SettingController());
 
   @override
@@ -76,7 +76,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                                 bottom:
                                     Get.locale?.languageCode == "en" ? 4 : 0),
                             child: Text(
-                              "all_story".tr,
+                              widget.title.tr,
                               style: TextStyle(fontFamily: fontFamiliy()),
                             ),
                           )
@@ -85,10 +85,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     ),
                   )
                 ])),
-            Expanded(child: GalleryScreenList()),
           ],
         ),
-        SidebarPartial(),
       ]),
     );
   }

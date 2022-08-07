@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/gallery_controller.dart';
+import 'package:flutter_desktop/dialog/custom_dialog.dart';
+import 'package:flutter_desktop/helper/font_family.dart';
 import 'package:flutter_desktop/helper/url_helper.dart';
 import 'package:flutter_desktop/models/response/story_response.dart';
+import 'package:flutter_desktop/screen/partials/story/story_detail.dart';
 import 'package:flutter_desktop/screen/partials/widgets/box_shadow.dart';
 import 'package:get/get.dart';
 
@@ -19,11 +22,18 @@ class GalleryScreenList extends StatefulWidget {
 
 class _GalleryScreenListState extends State<GalleryScreenList> {
   GalleryController galleryCtrl = Get.put(GalleryController());
-  ScrollController scrollStory = ScrollController();
+  ScrollController controller = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    galleryCtrl.p.value = 1;
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        galleryCtrl.p.value++;
+        galleryCtrl.getPagingStory();
+      }
+    });
 
     Future.delayed(Duration.zero, () {
       getStory();
@@ -43,7 +53,7 @@ class _GalleryScreenListState extends State<GalleryScreenList> {
       height: screen.height,
       child: Obx(() => galleryCtrl.isLoading.isTrue
           ? GridView.builder(
-              controller: scrollStory,
+              scrollDirection: Axis.vertical,
               itemCount: 18,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 6, crossAxisSpacing: 20, mainAxisSpacing: 20),
@@ -70,65 +80,99 @@ class _GalleryScreenListState extends State<GalleryScreenList> {
                     ));
               })
           : GridView.builder(
-              controller: scrollStory,
+              controller: controller,
+              scrollDirection: Axis.vertical,
               itemCount: galleryCtrl.galleries.value.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 6, crossAxisSpacing: 20, mainAxisSpacing: 20),
               itemBuilder: (context, index) {
                 StoryResponse gallery =
                     StoryResponse.fromJson(galleryCtrl.galleries.value[index]);
-                return Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.black26,
-                            Colors.black26,
-                          ],
-                        )),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: ICON_COLOR,
-                              boxShadow: [boxShadow(0, 1), boxShadow(1, 0)]),
-                          child: CachedNetworkImage(
-                            height: double.infinity,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            filterQuality: FilterQuality.high,
-                            imageUrl: UrlHelper.url(gallery.photo.url),
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) => Container(
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator(
-                                  color: WHITE_COLOR,
-                                  value: downloadProgress.progress),
+                return InkWell(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => CustomDialog(
+                              dialogWidget: StoryDetail(
+                                story: gallery,
+                                index: index,
+                              ),
+                            ));
+                  },
+                  child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black26,
+                              Colors.black26,
+                            ],
+                          )),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: ICON_COLOR,
+                                boxShadow: [boxShadow(0, 1), boxShadow(1, 0)]),
+                            child: CachedNetworkImage(
+                              height: double.infinity,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.high,
+                              imageUrl: UrlHelper.url(gallery.photo.url),
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Container(
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(
+                                    color: WHITE_COLOR,
+                                    value: downloadProgress.progress),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Image.asset(eschoolUrl),
                             ),
-                            errorWidget: (context, url, error) =>
-                                Image.asset(eschoolUrl),
                           ),
-                        ),
-                        Positioned(
-                            left: 10,
-                            top: 10,
-                            child: Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  border: Border.all(width: 4, color: FB_COLOR),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      filterQuality: FilterQuality.high,
-                                      image: NetworkImage(gallery.user.photo))),
-                            ))
-                      ],
-                    ));
+                          Positioned(
+                              left: 10,
+                              top: 10,
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40),
+                                    border:
+                                        Border.all(width: 4, color: FB_COLOR),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        filterQuality: FilterQuality.high,
+                                        image:
+                                            NetworkImage(gallery.user.photo))),
+                              )),
+                          Positioned(
+                              left: 0,
+                              bottom: 0,
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black26],
+                                )),
+                                child: Text(
+                                  gallery.user.name,
+                                  style: TextStyle(
+                                      fontFamily: fontFamiliy(),
+                                      color: WHITE_COLOR,
+                                      fontSize: 16),
+                                ),
+                              ))
+                        ],
+                      )),
+                );
               })),
     );
   }

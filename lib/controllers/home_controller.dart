@@ -11,6 +11,7 @@ class HomeController {
   getProvince() async {
     try {
       var x = await dioService.get("province");
+      print(x);
     } catch (e) {
       validateDialog(e.toString());
     }

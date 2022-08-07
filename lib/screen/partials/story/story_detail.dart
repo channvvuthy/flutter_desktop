@@ -9,6 +9,7 @@ import 'package:flutter_desktop/dialog/custom_dialog.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
 import 'package:flutter_desktop/helper/url_helper.dart';
 import 'package:flutter_desktop/models/response/story_response.dart';
+import 'package:flutter_desktop/screen/auth/profile_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -127,16 +128,22 @@ class _StoryDetailState extends State<StoryDetail> {
                         children: [
                           Row(
                             children: [
-                              Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: FB_COLOR, width: 4),
-                                    borderRadius: BorderRadius.circular(40),
-                                    color: ICON_COLOR,
-                                    image: DecorationImage(
-                                        image: NetworkImage(story.user.photo))),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => ProfileScreen());
+                                },
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: FB_COLOR, width: 4),
+                                      borderRadius: BorderRadius.circular(40),
+                                      color: ICON_COLOR,
+                                      image: DecorationImage(
+                                          image:
+                                              NetworkImage(story.user.photo))),
+                                ),
                               ),
                               SizedBox(
                                 width: 10,
