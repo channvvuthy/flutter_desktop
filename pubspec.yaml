@@ -73,6 +73,7 @@ flutter:
     - assets/img/e-footer.png
     - assets/img/eschool-cambodia.png
     - assets/img/logo-outline.png
+    - assets/img/cover.jpg
     - assets/svg/
 
   # An image asset can refer to one or more resolution-specific "variants", see

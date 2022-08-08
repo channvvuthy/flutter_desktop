@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/story_controller.dart';
+import 'package:flutter_desktop/controllers/user_controller.dart';
 import 'package:flutter_desktop/dialog/custom_dialog.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
 import 'package:flutter_desktop/helper/url_helper.dart';
@@ -130,6 +131,7 @@ class _StoryDetailState extends State<StoryDetail> {
                             children: [
                               GestureDetector(
                                 onTap: () {
+                                  UserController.id.value = story.user.id;
                                   Get.to(() => ProfileScreen());
                                 },
                                 child: Container(

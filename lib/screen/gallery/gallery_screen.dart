@@ -56,11 +56,11 @@ class _GalleryScreenState extends State<GalleryScreen> {
                               Get.back();
                             },
                             child: Container(
-                              width: 30,
+                              width: 25,
                               height: 25,
                               decoration: BoxDecoration(
                                   boxShadow: [boxShadow(0, 1), boxShadow(1, 0)],
-                                  borderRadius: BorderRadius.circular(4),
+                                  borderRadius: BorderRadius.circular(25),
                                   color: WHITE_COLOR),
                               child: Icon(
                                 Icons.navigate_before,

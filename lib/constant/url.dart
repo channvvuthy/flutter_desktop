@@ -35,4 +35,5 @@ const copyUrl = "assets/svg/copy.svg";
 const userUrl = "assets/svg/user.svg";
 const greetingUrl = "assets/svg/greeting.svg";
 const footerUrl = "assets/img/e-footer.png";
+const coverUrl = "assets/img/cover.jpg";
 const eschoolUrl = "assets/img/eschool-cambodia.png";

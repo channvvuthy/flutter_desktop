@@ -49,7 +49,7 @@ class LoginResponse {
         dateOfBirth: json["date_of_birth"],
         token: json["token"],
         inCart: json["in_cart"],
-        acceptedPostPolicy: json["accepted_post_policy"],
+        acceptedPostPolicy: json["accepted_post_policy"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {

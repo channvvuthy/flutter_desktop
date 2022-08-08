@@ -24,7 +24,7 @@ class LoginController extends GetxController {
     LoginRequest loginRequest = LoginRequest(
       phone: phone,
       password: password,
-      appVersion: '5.2',
+      appVersion: '5.1.0',
       deviceId: deviceInfo['systemGUID'],
       deviceOs: deviceInfo['hostName'],
       deviceName: deviceInfo['computerName'],
