@@ -6,7 +6,9 @@ import 'package:flutter_desktop/constant/url.dart';
 import 'package:flutter_desktop/controllers/setting_controller.dart';
 import 'package:flutter_desktop/controllers/user_controller.dart';
 import 'package:flutter_desktop/helper/font_family.dart';
+import 'package:flutter_desktop/helper/null_helper.dart';
 import 'package:flutter_desktop/helper/url_helper.dart';
+import 'package:flutter_desktop/screen/auth/user_info.dart';
 import 'package:flutter_desktop/screen/partials/header/back_header.dart';
 import 'package:flutter_desktop/screen/partials/sidebar/sidebar_partial.dart';
 import 'package:flutter_desktop/screen/partials/widgets/box_shadow.dart';
@@ -109,7 +111,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 userCtrl
                                                     .userDetail["first_name"],
                                         style: TextStyle(
-                                            fontFamily: fontFamiliy()),
+                                            fontFamily: fontFamiliy(),
+                                            fontSize: 20),
                                       )
                                     ],
                                   ),
@@ -117,27 +120,69 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ],
                         )),
                   ),
-                  Expanded(
+                  Obx(() => Expanded(
                       flex: 2,
                       child: Padding(
                         padding: EdgeInsets.only(left: 20),
-                        child: Container(
-                          clipBehavior: Clip.none,
-                          height: 300,
-                          color: PRIMARY_COLOR,
-                          child: GridView.count(
-                            crossAxisCount: 3,
-                            children: [
-                              Container(
-                                height: 10,
-                                decoration: BoxDecoration(
-                                    color: ICON_COLOR,
-                                    borderRadius: BorderRadius.circular(12.0)),
-                              ),
-                            ],
-                          ),
+                        child: Column(
+                          children: [
+                            Container(
+                              clipBehavior: Clip.none,
+                              height: 300,
+                              child: Column(children: [
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      UserInfo(title: "social", icon: shareUrl),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      UserInfo(
+                                        title: "gender",
+                                        icon: genderUrl,
+                                        gender: NullHelper.nullString(
+                                            userCtrl.userDetail["gender"]),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      UserInfo(
+                                        title: "province",
+                                        icon: markerUrl,
+                                        gender: NullHelper.nullString(userCtrl
+                                            .userDetail["province_name"]),
+                                      ),
+                                    ]),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      UserInfo(
+                                        title: "school",
+                                        icon: universityrUrl,
+                                        gender: NullHelper.nullString(
+                                            userCtrl.userDetail["school_name"]),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      UserInfo(
+                                          title: "gallery", icon: photoUrl),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      UserInfo(
+                                          title: "friend", icon: friendUrl),
+                                    ])
+                              ]),
+                            ),
+                          ],
                         ),
-                      ))
+                      )))
                 ],
               ),
             )

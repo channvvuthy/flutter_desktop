@@ -82,5 +82,9 @@ const en = {
   "see_more": "See More",
   "views": "Viewers",
   "all_story": "All Story",
-  "back": "Back"
+  "back": "Back",
+  "social": "Social",
+  "gender": "Gender",
+  "province": "Province",
+  "school": "School"
 };
