@@ -38,6 +38,7 @@ const genderUrl = "assets/svg/gender.svg";
 const markerUrl = "assets/svg/marker.svg";
 const photoUrl = "assets/svg/photo.svg";
 const universityrUrl = "assets/svg/university.svg";
+const postVideoUrl = "assets/svg/post_video.svg";
 const eschoolUrl = "assets/img/eschool-cambodia.png";
 const footerUrl = "assets/img/e-footer.png";
 const coverUrl = "assets/img/cover.jpg";

@@ -86,5 +86,6 @@ const en = {
   "social": "Social",
   "gender": "Gender",
   "province": "Province",
-  "school": "School"
+  "school": "School",
+  "say_something": "Say Something..."
 };

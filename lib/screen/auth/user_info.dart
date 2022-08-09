@@ -10,9 +10,8 @@ import 'package:get/get.dart';
 class UserInfo extends StatelessWidget {
   final String title;
   final String icon;
-  String gender = "";
-  UserInfo(
-      {Key? key, required this.title, required this.icon, this.gender = ""})
+  String des = "";
+  UserInfo({Key? key, required this.title, required this.icon, this.des = ""})
       : super(key: key);
 
   @override
@@ -27,7 +26,7 @@ class UserInfo extends StatelessWidget {
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
           title.tr,
-          style: TextStyle(fontFamily: fontFamiliy(), fontSize: 18),
+          style: TextStyle(fontFamily: fontFamiliy()),
         ),
         SizedBox(
           height: 10,
@@ -41,7 +40,7 @@ class UserInfo extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Text(gender, style: TextStyle(fontFamily: fontFamiliy(), fontSize: 18))
+        Text(des, style: TextStyle(fontFamily: fontFamiliy()))
       ]),
     ));
   }

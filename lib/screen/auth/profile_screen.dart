@@ -111,8 +111,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 userCtrl
                                                     .userDetail["first_name"],
                                         style: TextStyle(
-                                            fontFamily: fontFamiliy(),
-                                            fontSize: 20),
+                                          fontFamily: fontFamiliy(),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -139,10 +139,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         width: 20,
                                       ),
                                       UserInfo(
-                                        title: "gender",
-                                        icon: genderUrl,
-                                        gender: NullHelper.nullString(
-                                            userCtrl.userDetail["gender"]),
+                                        title: "document",
+                                        icon: documentUrl,
+                                        des: NullHelper.nullString(
+                                            userCtrl.userDetail["des"]),
                                       ),
                                       SizedBox(
                                         width: 20,
@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       UserInfo(
                                         title: "province",
                                         icon: markerUrl,
-                                        gender: NullHelper.nullString(userCtrl
+                                        des: NullHelper.nullString(userCtrl
                                             .userDetail["province_name"]),
                                       ),
                                     ]),
@@ -164,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       UserInfo(
                                         title: "school",
                                         icon: universityrUrl,
-                                        gender: NullHelper.nullString(
+                                        des: NullHelper.nullString(
                                             userCtrl.userDetail["school_name"]),
                                       ),
                                       SizedBox(

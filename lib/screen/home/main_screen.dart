@@ -5,6 +5,8 @@ import 'package:flutter_desktop/constant/color.dart';
 import 'package:flutter_desktop/controllers/setting_controller.dart';
 import 'package:flutter_desktop/controllers/story_controller.dart';
 import 'package:flutter_desktop/screen/partials/header/header.dart';
+import 'package:flutter_desktop/screen/partials/social/social_body.dart';
+import 'package:flutter_desktop/screen/partials/social/social_header.dart';
 import 'package:flutter_desktop/screen/partials/story/home_story.dart';
 import 'package:flutter_desktop/widgets/greeting.dart';
 import 'package:get/get.dart';
@@ -76,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
               shrinkWrap: true,
               physics: ScrollPhysics(),
               scrollDirection: Axis.vertical,
-              children: [HomeStory()],
+              children: [HomeStory(), SocialHeader(), SocialBody()],
             ))
           ],
         ));

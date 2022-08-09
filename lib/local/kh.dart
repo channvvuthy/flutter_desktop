@@ -86,5 +86,6 @@ const kh = {
   "social": "បណ្ដាញ",
   "gender": "ភេទ",
   "province": "ខេត្ត",
-  "school": "សាលា"
+  "school": "សាលា",
+  "say_something": "បញ្ចេញមតិយោបល់..."
 };
