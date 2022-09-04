@@ -1,174 +1,174 @@
-import 'dart:convert';
-
-List<SocialResponse> socialResponseFromJson(String str) =>
-    List<SocialResponse>.from(
-        json.decode(str).map((x) => SocialResponse.fromJson(x)));
-
-String socialResponseToJson(List<SocialResponse> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class SocialResponse {
-  SocialResponse({
-    required this.id,
-    required this.type,
-    required this.caption,
-    required this.photo,
-    required this.thumbnail,
-    required this.video,
-    required this.live,
-    required this.user,
-    required this.date,
-    required this.isLike,
-    required this.isEdit,
-    required this.isFavorite,
-    required this.total,
-    required this.liker,
-  });
+  String? sId;
+  Total? total;
+  int? type;
+  String? caption;
+  List<Photo>? photo;
+  Photo? video;
+  User? user;
+  String? date;
+  int? isLike;
+  int? isEdit;
+  List<Liker>? liker;
+  int? isFavorite;
 
-  String id;
-  int type;
-  String caption;
-  List<Thumbnail> photo;
-  Thumbnail thumbnail;
-  List<Live> video;
-  List<Live> live;
-  User user;
-  DateTime date;
-  bool isLike;
-  bool isEdit;
-  bool isFavorite;
-  Total total;
-  List<User> liker;
+  SocialResponse(
+      {this.sId,
+        this.total,
+        this.type,
+        this.caption,
+        this.photo,
+        this.video,
+        this.user,
+        this.date,
+        this.isLike,
+        this.isEdit,
+        this.liker,
+        this.isFavorite});
 
-  factory SocialResponse.fromJson(Map<String, dynamic> json) => SocialResponse(
-        id: json["_id"],
-        type: json["type"],
-        caption: json["caption"],
-        photo: List<Thumbnail>.from(
-            json["photo"].map((x) => Thumbnail.fromJson(x))),
-        thumbnail: Thumbnail.fromJson(json["thumbnail"]),
-        video: List<Live>.from(json["video"].map((x) => Live.fromJson(x))),
-        live: List<Live>.from(json["live"].map((x) => Live.fromJson(x))),
-        user: User.fromJson(json["user"]),
-        date: DateTime.parse(json["date"]),
-        isLike: json["is_like"],
-        isEdit: json["is_edit"],
-        isFavorite: json["is_favorite"],
-        total: Total.fromJson(json["total"]),
-        liker: List<User>.from(json["liker"].map((x) => User.fromJson(x))),
-      );
+  SocialResponse.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    total = json['total'] != null ? Total.fromJson(json['total']) : null;
+    type = json['type'];
+    caption = json['caption'];
+    if (json['photo'] != null) {
+      photo = <Photo>[];
+      json['photo'].forEach((v) {
+        photo!.add(Photo.fromJson(v));
+      });
+    }
+    video = json['video'] != null ? Photo.fromJson(json['video']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    date = json['date'];
+    isLike = json['is_like'];
+    isEdit = json['is_edit'];
+    if (json['liker'] != null) {
+      liker = <Liker>[];
+      json['liker'].forEach((v) {
+        liker!.add(Liker.fromJson(v));
+      });
+    }
+    isFavorite = json['is_favorite'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "type": type,
-        "caption": caption,
-        "photo": List<dynamic>.from(photo.map((x) => x.toJson())),
-        "thumbnail": thumbnail.toJson(),
-        "video": List<dynamic>.from(video.map((x) => x.toJson())),
-        "live": List<dynamic>.from(live.map((x) => x.toJson())),
-        "user": user.toJson(),
-        "date":
-            "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
-        "is_like": isLike,
-        "is_edit": isEdit,
-        "is_favorite": isFavorite,
-        "total": total.toJson(),
-        "liker": List<dynamic>.from(liker.map((x) => x.toJson())),
-      };
-}
-
-class User {
-  User({
-    required this.id,
-    required this.name,
-    required this.photo,
-  });
-
-  String id;
-  String name;
-  String photo;
-
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["_id"],
-        name: json["name"],
-        photo: json["photo"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "name": name,
-        "photo": photo,
-      };
-}
-
-class Live {
-  Live({
-    required this.url,
-    required this.quality,
-  });
-
-  String url;
-  String quality;
-
-  factory Live.fromJson(Map<String, dynamic> json) => Live(
-        url: json["url"],
-        quality: json["quality"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "url": url,
-        "quality": quality,
-      };
-}
-
-class Thumbnail {
-  Thumbnail({
-    required this.url,
-    required this.width,
-    required this.height,
-  });
-
-  String url;
-  int width;
-  int height;
-
-  factory Thumbnail.fromJson(Map<String, dynamic> json) => Thumbnail(
-        url: json["url"],
-        width: json["width"],
-        height: json["height"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "url": url,
-        "width": width,
-        "height": height,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    if (total != null) {
+      data['total'] = total!.toJson();
+    }
+    data['type'] = type;
+    data['caption'] = caption;
+    if (photo != null) {
+      data['photo'] = photo!.map((v) => v.toJson()).toList();
+    }
+    if (video != null) {
+      data['video'] = video!.toJson();
+    }
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
+    data['date'] = date;
+    data['is_like'] = isLike;
+    data['is_edit'] = isEdit;
+    if (liker != null) {
+      data['liker'] = liker!.map((v) => v.toJson()).toList();
+    }
+    data['is_favorite'] = isFavorite;
+    return data;
+  }
 }
 
 class Total {
-  Total({
-    required this.seen,
-    required this.like,
-    required this.comment,
-    required this.concurrent,
-  });
+  int? seen;
+  int? comment;
+  int? like;
+  int? concurrent;
+  int? reported;
 
-  int seen;
-  int like;
-  int comment;
-  int concurrent;
+  Total({this.seen, this.comment, this.like, this.concurrent, this.reported});
 
-  factory Total.fromJson(Map<String, dynamic> json) => Total(
-        seen: json["seen"],
-        like: json["like"],
-        comment: json["comment"],
-        concurrent: json["concurrent"],
-      );
+  Total.fromJson(Map<String, dynamic> json) {
+    seen = json['seen'];
+    comment = json['comment'];
+    like = json['like'];
+    concurrent = json['concurrent'];
+    reported = json['reported'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "seen": seen,
-        "like": like,
-        "comment": comment,
-        "concurrent": concurrent,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['seen'] = seen;
+    data['comment'] = comment;
+    data['like'] = like;
+    data['concurrent'] = concurrent;
+    data['reported'] = reported;
+    return data;
+  }
+}
+
+class Photo {
+  int? height;
+  String? url;
+  int? width;
+
+  Photo({this.height, this.url, this.width});
+
+  Photo.fromJson(Map<String, dynamic> json) {
+    height = json['height'];
+    url = json['url'];
+    width = json['width'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['height'] = height;
+    data['url'] = url;
+    data['width'] = width;
+    return data;
+  }
+}
+
+class User {
+  String? sId;
+  String? name;
+  String? photo;
+
+  User({this.sId, this.name, this.photo});
+
+  User.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    name = json['name'];
+    photo = json['photo'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['name'] = name;
+    data['photo'] = photo;
+    return data;
+  }
+}
+
+class Liker {
+  String? sId;
+  String? name;
+  String? photo;
+
+  Liker({this.sId, this.name, this.photo});
+
+  Liker.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    name = json['name'];
+    photo = json['photo'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['name'] = name;
+    data['photo'] = photo;
+    return data;
+  }
 }

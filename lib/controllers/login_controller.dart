@@ -36,6 +36,7 @@ class LoginController extends GetxController {
 
     try {
       Map body = loginRequest.toJson();
+      dioService.setToken("");
       var response = await dioService.post("user/login", body);
       isLoading.value = false;
 

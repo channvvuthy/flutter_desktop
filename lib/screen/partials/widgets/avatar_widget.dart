@@ -26,6 +26,14 @@ class AvatarWidget extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 2),
+            ),
+          ],
             color: ICON_COLOR,
             image: DecorationImage(
                 filterQuality: FilterQuality.high,
