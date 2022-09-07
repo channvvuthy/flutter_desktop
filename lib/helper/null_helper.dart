@@ -5,4 +5,13 @@ class NullHelper {
     }
     return text;
   }
+
+  static nullArray(var arr) {
+    if (arr is List) {
+      if (arr.isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

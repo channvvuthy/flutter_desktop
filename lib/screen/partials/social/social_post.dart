@@ -23,10 +23,12 @@ class _SocialPostState extends State<SocialPost> {
   void initState() {
     super.initState();
     getSocial();
+
   }
 
   getSocial() async {
     await socialCtrl.getSocial();
+    print(socialCtrl.social);
   }
 
   @override
